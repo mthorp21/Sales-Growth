@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morning Belle · Sales Growth Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #99C961;
+    --yellow: #ffde5c;
+    --coral: #fc826d;
+    --teal: #3c5c68;
+    --charcoal: #4d4d4d;
+    --amber: #fbaf41;
+    --sage: #9bc4bc;
+    --burnt: #d57136;
+    --orange: #f46e3b;
+    --cream: #fdf8f2;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--teal);
+    padding: 28px 24px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    background: var(--green);
+    opacity: 0.15;
+    border-radius: 50%;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: -20px;
+    width: 120px; height: 120px;
+    background: var(--yellow);
+    opacity: 0.12;
+    border-radius: 50%;
+  }
+  .header-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 6px;
+  }
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--white);
+    line-height: 1.2;
+  }
+  .header-title em {
+    color: var(--yellow);
+    font-style: italic;
+  }
+  .header-sub {
+    font-size: 12px;
+    color: var(--sage);
+    margin-top: 6px;
+    font-weight: 300;
+  }
+
+  /* NAV PILLS */
+  .nav-wrap {
+    background: var(--white);
+    border-bottom: 1px solid rgba(60,92,104,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .nav-scroll {
+    display: flex;
+    overflow-x: auto;
+    padding: 12px 16px;
+    gap: 8px;
+    scrollbar-width: none;
+  }
+  .nav-scroll::-webkit-scrollbar { display: none; }
+  .nav-pill {
+    flex-shrink: 0;
+    padding: 7px 14px;
+    border-radius: 20px;
+    border: 1.5px solid rgba(60,92,104,0.2);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--teal);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  .nav-pill.active, .nav-pill:hover {
+    background: var(--teal);
+    color: var(--white);
+    border-color: var(--teal);
+  }
+  .nav-pill.active { font-weight: 500; }
+
+  /* SECTIONS */
+  .sections {
+    padding: 20px 16px 40px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .section {
+    display: none;
+    animation: fadeUp 0.3s ease forwards;
+  }
+  .section.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    line-height: 1;
+    font-weight: 700;
+    opacity: 0.18;
+    position: absolute;
+    right: 16px;
+    top: 12px;
+  }
+  .section-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .section-tagline {
+    font-size: 12px;
+    font-weight: 300;
+    opacity: 0.75;
+    font-style: italic;
+  }
+
+  /* COLOR THEMES PER SECTION */
+  .theme-coral { background: linear-gradient(135deg, #fff0ed, #ffe4df); }
+  .theme-coral .section-title { color: var(--burnt); }
+  .theme-coral .section-tagline { color: var(--burnt); }
+
+  .theme-teal { background: linear-gradient(135deg, #eaf4f2, #d6eceb); }
+  .theme-teal .section-title { color: var(--teal); }
+  .theme-teal .section-tagline { color: var(--teal); }
+
+  .theme-amber { background: linear-gradient(135deg, #fff8e8, #ffefc5); }
+  .theme-amber .section-title { color: #b07000; }
+  .theme-amber .section-tagline { color: #b07000; }
+
+  .theme-green { background: linear-gradient(135deg, #f0f9e8, #dff0cc); }
+  .theme-green .section-title { color: #4a7a1e; }
+  .theme-green .section-tagline { color: #4a7a1e; }
+
+  .theme-orange { background: linear-gradient(135deg, #fff3ed, #fde4d0); }
+  .theme-orange .section-title { color: var(--orange); }
+  .theme-orange .section-tagline { color: var(--orange); }
+
+  .theme-sage { background: linear-gradient(135deg, #f2f8f7, #daecea); }
+  .theme-sage .section-title { color: #3a7a70; }
+  .theme-sage .section-tagline { color: #3a7a70; }
+
+  .theme-yellow { background: linear-gradient(135deg, #fffce8, #fff4b8); }
+  .theme-yellow .section-title { color: #7a6600; }
+  .theme-yellow .section-tagline { color: #7a6600; }
+
+  .theme-burnt { background: linear-gradient(135deg, #fdf0e8, #f9ddc8); }
+  .theme-burnt .section-title { color: var(--burnt); }
+  .theme-burnt .section-tagline { color: var(--burnt); }
+
+  /* CARDS */
+  .card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-left: 4px solid transparent;
+  }
+  .card-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--teal);
+  }
+  .card p {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--charcoal);
+    margin-bottom: 8px;
+  }
+  .card p:last-child { margin-bottom: 0; }
+
+  /* SCRIPT BUBBLES */
+  .script {
+    background: var(--teal);
+    color: var(--white);
+    border-radius: 12px 12px 12px 4px;
+    padding: 12px 16px;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 10px 0;
+    font-style: italic;
+    position: relative;
+  }
+  .script::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    color: var(--sage);
+    opacity: 0.4;
+    position: absolute;
+    top: -4px;
+    left: 10px;
+    line-height: 1;
+  }
+  .script-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 4px;
+    font-style: normal;
+  }
+
+  .script.never {
+    background: #f5f5f5;
+    color: #888;
+    border-radius: 12px 12px 12px 4px;
+    text-decoration-color: #ccc;
+  }
+  .script.never .script-label { color: #bbb; }
+
+  /* NEVER / ALWAYS PAIR */
+  .swap-pair { margin: 10px 0; }
+  .swap-pair .never { margin-bottom: 6px; }
+
+  /* CUES LIST */
+  .cue-list {
+    list-style: none;
+    margin: 8px 0;
+  }
+  .cue-list li {
+    font-size: 13.5px;
+    line-height: 1.6;
+    padding: 6px 0 6px 24px;
+    position: relative;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    color: var(--charcoal);
+  }
+  .cue-list li:last-child { border-bottom: none; }
+  .cue-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--coral);
+    font-weight: 700;
+  }
+
+  /* ACCENT CHIPS */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .chip {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: rgba(60,92,104,0.08);
+    color: var(--teal);
+  }
+
+  /* PRINCIPLE BOX */
+  .principle {
+    background: var(--teal);
+    color: var(--white);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-top: 16px;
+    text-align: center;
+  }
+  .principle p {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1.6;
+    color: var(--white);
+    margin: 0;
+  }
+  .principle span {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-top: 8px;
+  }
+
+  /* ACCENT COLORS ON CARDS BY SECTION */
+  .s1 .card { border-left-color: var(--coral); }
+  .s1 .card-label { color: var(--coral); }
+  .s2 .card { border-left-color: var(--teal); }
+  .s2 .card-label { color: var(--teal); }
+  .s3 .card { border-left-color: var(--amber); }
+  .s3 .card-label { color: #b07000; }
+  .s4 .card { border-left-color: var(--green); }
+  .s4 .card-label { color: #4a7a1e; }
+  .s5 .card { border-left-color: var(--orange); }
+  .s5 .card-label { color: var(--orange); }
+  .s6 .card { border-left-color: var(--sage); }
+  .s6 .card-label { color: #3a7a70; }
+  .s7 .card { border-left-color: var(--yellow); }
+  .s7 .card-label { color: #7a6600; }
+  .s8 .card { border-left-color: var(--burnt); }
+  .s8 .card-label { color: var(--burnt); }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: rgba(60,92,104,0.08);
+    margin: 14px 0;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 11px;
+    color: rgba(77,77,77,0.4);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">Morning Belle · Internal Reference</div>
+  <h1 class="header-title">Sales <em>Growth</em> Guide</h1>
+  <p class="header-sub">The best marketing comes from the four walls.</p>
+</div>
+
+<div class="nav-wrap">
+  <div class="nav-scroll">
+    <button class="nav-pill active" onclick="show('s1', this)">1 · Gratitude</button>
+    <button class="nav-pill" onclick="show('s2', this)">2 · Read the Room</button>
+    <button class="nav-pill" onclick="show('s3', this)">3 · Beverages</button>
+    <button class="nav-pill" onclick="show('s4', this)">4 · Add-Ons</button>
+    <button class="nav-pill" onclick="show('s5', this)">5 · Lobby Comfort</button>
+    <button class="nav-pill" onclick="show('s6', this)">6 · Catering</button>
+    <button class="nav-pill" onclick="show('s7', this)">7 · Events</button>
+    <button class="nav-pill" onclick="show('s8', this)">8 · Own Your 5 Miles</button>
+  </div>
+</div>
+
+<div class="sections">
+
+  <!-- SECTION 1: GRATITUDE -->
+  <div id="s1" class="section s1 active">
+    <div class="section-header theme-coral">
+      <div class="section-icon">🌱</div>
+      <div>
+        <div class="section-title">Start With Gratitude</div>
+        <div class="section-tagline">They passed 10 other restaurants to get here. We owe them our best. Our goal is to be our guests' favorite place to eat, drink, and be with friends and family.</div>
+      </div>
+      <div class="section-num">01</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Loyalty / Rewards</div>
+      <div class="script"><div class="script-label">Say This</div>You're in our rewards program — that means a lot to us. Thank you.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Waitlist</div>
+      <div class="script"><div class="script-label">Say This</div>Oh, nice! Thank you for joining online. We'll take great care of you.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Reservation</div>
+      <div class="script"><div class="script-label">Say This</div>That's really great, we love reservations. We're so glad you planned ahead.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Guests Waiting (Host + Server Both Own This)</div>
+      <div class="script"><div class="script-label">Say This</div>We appreciate your patience so much. You chose to spend your morning with us and that matters.</div>
+      <div class="divider"></div>
+      <p style="font-size:12px; color:#888;">Both the host and the waiting server acknowledge the wait. Gratitude is not one person's job.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Find Reasons to Compliment</div>
+      <p>A genuine compliment makes a guest feel seen. Not flattered. Seen. Look for something real and name it.</p>
+      <div class="script"><div class="script-label">Example</div>That's a beautiful sweater, Mrs. Higgins.</div>
+      <div class="script"><div class="script-label">Example</div>I love that bag. Great choice.</div>
+      <div class="script"><div class="script-label">Example</div>Your kids are so well-behaved. What a great little crew.</div>
+      <div class="script"><div class="script-label">Example</div>Happy birthday, by the way. We're so glad you're spending it with us.</div>
+      <div class="divider"></div>
+      <ul class="cue-list">
+        <li>Something they're wearing, something they said, something about their group</li>
+        <li>Use their name if you have it. A name is the best compliment you can pay.</li>
+        <li>One genuine compliment lands better than five generic ones</li>
+        <li>Never force it. If it isn't real, don't say it.</li>
+      </ul>
+    </div>
+
+    <div class="principle">
+      <p>Gratitude is not a script. It's a posture. Every touchpoint is a chance to say: we know you had a choice, and we're glad you chose us.</p>
+      <span>The Morning Belle Standard</span>
+    </div>
+  </div>
+
+  <!-- SECTION 2: OBSERVATIONAL HOSPITALITY -->
+  <div id="s2" class="section s2">
+    <div class="section-header theme-teal">
+      <div class="section-icon">👁</div>
+      <div>
+        <div class="section-title">Observational Hospitality</div>
+        <div class="section-tagline">See everything. Say nothing twice.</div>
+      </div>
+      <div class="section-num">02</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Read the Table</div>
+      <ul class="cue-list">
+        <li>Guest scanning the room is looking for something. Get there first.</li>
+        <li>Empty glass is not a question. It's a cue. Refill it or ask.</li>
+        <li>Plate pushed to the edge means they're done. Clear it.</li>
+        <li>Two people talking quietly and not looking around want space. Give it.</li>
+        <li>Guest who looks tense or bothered didn't start that way. Find out what happened and fix it.</li>
+        <li>Eye contact from a seated guest means they need you. Respond immediately.</li>
+        <li>Guests still wearing their coats? The room might be cold. Check the temperature before they have to ask.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Read the Room</div>
+      <p style="font-size:12px; color:#888; margin-bottom:10px;">Before the first guest walks in, the room has to be ready.</p>
+      <ul class="cue-list">
+        <li>Floors clean? Every corner, not just the aisle.</li>
+        <li>Bathrooms stocked, clean, and smelling right? Check on a schedule, not when someone complains.</li>
+        <li>Tables fully set? Salt, pepper, syrup, hot sauce, ketchup, sugar caddy.</li>
+        <li>Menus clean? A sticky menu is a first impression.</li>
+        <li>Music right for the daypart? Energy in the room starts with the room.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Anticipate the Need</div>
+      <ul class="cue-list">
+        <li>Shareable order? Bring extra plates before they ask.</li>
+        <li>Multiple dishes incoming? Lay out silverware for everyone before food arrives.</li>
+        <li>Table with a baby or toddler? Offer the high chair before the parent wrestles with it.</li>
+        <li>Guest poured their own water from the carafe? You should have been there first.</li>
+        <li>Toast, bread, or a pastry ordered? Butter and jam on the table, already.</li>
+        <li>Hot sauce or ketchup ordered last time? Have it there when they sit down.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Cleanliness Is Hospitality</div>
+      <ul class="cue-list">
+        <li>A clean floor says we care before the food arrives.</li>
+        <li>A dirty bathroom says we stopped caring after you walked in.</li>
+        <li>Every Gardener owns the room. Not just their section.</li>
+        <li>If you see it, fix it. That is the standard.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-label">The Language of Observation</div>
+      <div class="swap-pair">
+        <div class="script never"><div class="script-label">Never Say</div>Is everything okay?</div>
+        <div class="script"><div class="script-label">Say This Instead</div>What can I bring you right now?</div>
+      </div>
+      <div class="divider"></div>
+      <div class="script"><div class="script-label">Say This</div>I noticed your glass was getting low.</div>
+      <div class="script"><div class="script-label">Say This</div>I wanted to bring extra plates in case you wanted to share.</div>
+      <div class="script"><div class="script-label">Say This</div>What can I grab to make you more comfortable?</div>
+    </div>
+
+    <div class="principle">
+      <p>The guest feels seen before they ask for anything. That's the whole standard.</p>
+      <span>Uncommon Hospitality</span>
+    </div>
+  </div>
+
+  <!-- SECTION 3: BEVERAGES -->
+  <div id="s3" class="section s3">
+    <div class="section-header theme-amber">
+      <div class="section-icon">🥂</div>
+      <div>
+        <div class="section-title">Beverage First</div>
+        <div class="section-tagline">Lead with the drink. The check follows.</div>
+      </div>
+      <div class="section-num">03</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">The Standard Greeting</div>
+      <div class="swap-pair">
+        <div class="script never"><div class="script-label">Never Say</div>What can I getcha?</div>
+        <div class="script"><div class="script-label">Always Say</div>Would you like to try a Morning Belle mimosa or brunch cocktail? If you're not looking for a cocktail, we have our Sunrise Squeeze and iced lattes.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Table Reads + Specific Suggestions</div>
+      <ul class="cue-list">
+        <li><strong>Date table of two</strong> — Belle Mimosa, Morning Spritz</li>
+        <li><strong>Group table</strong> — Bottle of champagne, "squeeze in more flavor"</li>
+        <li><strong>Sober or light drinker</strong> — Sunrise Squeeze, Bloom and Bubbles Zero</li>
+        <li><strong>Coffee moment</strong> — Spiked Cold Brew, Wake Up Call</li>
+        <li><strong>Guest mentions beer</strong> — Founders Solid Gold Lager, Beermosa</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Refill Is a Revenue Moment</div>
+      <p>A second round of mimosas is not a favor. It's an opportunity. Always ask before the glass is empty.</p>
+      <div class="script"><div class="script-label">Say This</div>Would you like another mimosa while you enjoy your meal?</div>
+    </div>
+
+    <div class="principle">
+      <p>Name the drink. Describe it. Make them want it. "We have drinks" sells nothing.</p>
+      <span>Beverage Standard</span>
+    </div>
+  </div>
+
+  <!-- SECTION 4: ADD-ONS -->
+  <div id="s4" class="section s4">
+    <div class="section-header theme-green">
+      <div class="section-icon">🍳</div>
+      <div>
+        <div class="section-title">Food Add-Ons and Pairings</div>
+        <div class="section-tagline">Balance the plate. Build the check.</div>
+      </div>
+      <div class="section-num">04</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Sweet Order? Suggest Something Salty.</div>
+      <div class="script"><div class="script-label">Say This</div>That Cinnamon Roll French Toast is incredible. A lot of guests love adding the Burnt Pork Ends or smoked bacon on the side to balance the sweet.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Savory Order? Round It Out.</div>
+      <div class="script"><div class="script-label">Say This</div>Would you like to add an egg on top or a side of toast?</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Bowl or Lighter Order? Add Texture.</div>
+      <div class="script"><div class="script-label">Say This</div>Our Chit Chats are a great little add-on. Warm cinnamon doughnut bites on the side.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Protein Upsell</div>
+      <div class="script"><div class="script-label">Say This</div>We have local smoked ham, bacon, sausage, chorizo, and corned beef as add-ons. Want to build it out?</div>
+      <div class="chips">
+        <span class="chip">Local smoked ham</span>
+        <span class="chip">Bacon</span>
+        <span class="chip">Sausage</span>
+        <span class="chip">Chorizo</span>
+        <span class="chip">Corned beef</span>
+      </div>
+    </div>
+
+    <div class="principle">
+      <p>Every plate suggestion should sound like a recommendation from someone who loves the food. Not a menu recitation.</p>
+      <span>Food Standard</span>
+    </div>
+  </div>
+
+  <!-- SECTION 5: LOBBY COMFORT -->
+  <div id="s5" class="section s5">
+    <div class="section-header theme-orange">
+      <div class="section-icon">☕</div>
+      <div>
+        <div class="section-title">Lobby Comfort</div>
+        <div class="section-tagline">The wait is a sales opportunity.</div>
+      </div>
+      <div class="section-num">05</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">The Default Sample</div>
+      <p>Chit Chats. Warm, easy, low cost, high memorability. Every waiting guest is a candidate.</p>
+      <div class="script"><div class="script-label">Say This</div>While you wait, would you like to try our Chit Chats? Warm cinnamon doughnut bites with Morning Belle sprinkles. On us.</div>
+      <div class="script"><div class="script-label">Or This</div>Here's a little something from us while we get your table ready.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Why It Works</div>
+      <ul class="cue-list">
+        <li>Removes friction from the wait experience</li>
+        <li>Builds an emotional memory before the guest sits down</li>
+        <li>Guests who receive something during the wait tip more and return more often</li>
+        <li>It is the $30 experience starting in the lobby</li>
+      </ul>
+    </div>
+
+    <div class="principle">
+      <p>Lobby comfort is not a cost. It's the cheapest marketing we do.</p>
+      <span>Uncommon Hospitality</span>
+    </div>
+  </div>
+
+  <!-- SECTION 6: CATERING -->
+  <div id="s6" class="section s6">
+    <div class="section-header theme-sage">
+      <div class="section-icon">📦</div>
+      <div>
+        <div class="section-title">Catering</div>
+        <div class="section-tagline">Every table is a catering lead.</div>
+      </div>
+      <div class="section-num">06</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Trigger Moments</div>
+      <ul class="cue-list">
+        <li>Guest mentions an upcoming event, birthday, office, or group gathering</li>
+        <li>Large table with coworkers</li>
+        <li>Guest says "I love this place" or "we come here all the time"</li>
+        <li>Guest is picking up to-go and mentions a team or group</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-label">The Pitch</div>
+      <div class="script"><div class="script-label">Say This</div>Did you know we cater? We can bring Morning Belle to your office or your next event. Cinnamon Roll French Toast for the whole team. Our cards are at the host stand.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Campaign Language</div>
+      <div class="chips">
+        <span class="chip">Bring the Belle.</span>
+        <span class="chip">Everyday luxury. Delivered.</span>
+        <span class="chip">Order online or call it in.</span>
+      </div>
+      <p style="font-size:12px; color:#888; margin-top:10px;">Catering is off-site, transactional, and convenience-driven. It is Morning Belle, delivered. Keep the message simple.</p>
+    </div>
+
+    <div class="principle">
+      <p>The four walls are the best catering sales channel we have. Every server is a catering rep.</p>
+      <span>Catering Standard</span>
+    </div>
+  </div>
+
+  <!-- SECTION 7: EVENTS -->
+  <div id="s7" class="section s7">
+    <div class="section-header theme-yellow">
+      <div class="section-icon">🎉</div>
+      <div>
+        <div class="section-title">Private Events</div>
+        <div class="section-tagline">Own the occasion.</div>
+      </div>
+      <div class="section-num">07</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Trigger Moments</div>
+      <ul class="cue-list">
+        <li>Anniversary, birthday, baby shower, bridal brunch, retirement</li>
+        <li>Guest mentions they're planning something</li>
+        <li>Large group reservation, especially on a weekday</li>
+        <li>Guest says "we need a place for our whole team"</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-label">The Pitch</div>
+      <div class="script"><div class="script-label">Say This</div>We actually host private events here. If you ever want to reserve the space for your group, we'd love to make that happen for you.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Campaign Language</div>
+      <div class="chips">
+        <span class="chip">Your people. Your Morning Belle.</span>
+        <span class="chip">Your Belle. Reserved for you.</span>
+        <span class="chip">Celebrate together.</span>
+      </div>
+      <p style="font-size:12px; color:#888; margin-top:10px;">Events is on-site, curated, and occasion-driven. It is not catering. Never mix the two in copy or conversation.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Key Numbers to Know</div>
+      <ul class="cue-list">
+        <li>Weekday minimum: $800 food and beverage</li>
+        <li>Weekend minimum: $1,200 food and beverage</li>
+        <li>Available 3pm weekdays, 4pm weekends</li>
+        <li>Capacity: 80 to 130 guests depending on location</li>
+      </ul>
+    </div>
+
+    <div class="principle">
+      <p>Every server is an event coordinator. The conversation starts at the table.</p>
+      <span>Events Standard</span>
+    </div>
+  </div>
+
+  <!-- SECTION 8: OWN YOUR 5 MILES -->
+  <div id="s8" class="section s8">
+    <div class="section-header theme-burnt">
+      <div class="section-icon">📍</div>
+      <div>
+        <div class="section-title">Own Your 5 Miles</div>
+        <div class="section-tagline">The best marketing comes from the four walls.</div>
+      </div>
+      <div class="section-num">08</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">What Every Gardener Can Do</div>
+      <ul class="cue-list">
+        <li>Leave a card or flyer at a nearby business during your off time</li>
+        <li>Know the neighborhood. Know the regulars. Know who is new.</li>
+        <li>When a guest mentions they work nearby, ask if their team knows about us</li>
+        <li>If a guest is from out of town, ask them to tell their people when they get home</li>
+        <li>Know what events are happening within 5 miles. Be ready to invite people in.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Scripts for the Neighborhood</div>
+      <div class="script"><div class="script-label">For the Local Worker</div>Do you work around here? We'd love for your team to know about us.</div>
+      <div class="script"><div class="script-label">For the Out-of-Towner</div>We're so glad you found us. Tell your people about us when you get home.</div>
+      <div class="script"><div class="script-label">For the Regular</div>Do you have friends who haven't been in yet? We'd love to meet them.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Local Store Marketing Is Not a Manager Job</div>
+      <p>Every Gardener is a brand ambassador. Every conversation inside the four walls can extend the brand beyond them.</p>
+      <div class="chips">
+        <span class="chip">Rooted in the neighborhood</span>
+        <span class="chip">Run it like you own it</span>
+        <span class="chip">Collective genius</span>
+      </div>
+    </div>
+
+    <div class="principle">
+      <p>We are not a chain passing through. We are the place that showed up, stayed, and became part of the neighborhood.</p>
+      <span>Morning Belle Brand Pillar 04</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">Morning Belle · Internal Reference · All Four Locations</div>
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: document.querySelector('.nav-wrap').offsetTop, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
